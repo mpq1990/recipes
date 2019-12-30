@@ -87,7 +87,6 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 "\n" +
                 "You could also easily double or even triple this recipe for a larger party. A taco and a cold beer on a warm day? Now that’s living!");
 
-        notesGrillChicken.setRecipe(spicyGrilledChickenTacos);
         spicyGrilledChickenTacos.setNotes(notesGrillChicken);
 
         spicyGrilledChickenTacos.
@@ -265,7 +264,6 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 "\n" +
                 "If you leave the guacamole exposed to air, it will start to brown and discolor. That browning isn’t very appetizing, but the guacamole is still good. You can either scrape off the brown parts and discard, or stir them into the rest of the guacamole.");
 
-        notesGuacamole.setRecipe(guacamole);
         guacamole.setNotes(notesGuacamole);
 
 
