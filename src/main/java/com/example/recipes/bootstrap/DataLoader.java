@@ -7,12 +7,14 @@ import com.example.recipes.model.Recipe;
 import com.example.recipes.repositories.CategoryRepository;
 import com.example.recipes.repositories.RecipeRepository;
 import com.example.recipes.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
+@Slf4j
 @Component
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -30,6 +32,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         loadData();
+        log.debug("loaded the bootstrap data");
     }
 
     private void loadData() {
