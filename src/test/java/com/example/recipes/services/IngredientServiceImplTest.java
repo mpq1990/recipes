@@ -7,6 +7,7 @@ import com.example.recipes.converters.UnitOfMeasureCommandToUnitOfMeasure;
 import com.example.recipes.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import com.example.recipes.model.Ingredient;
 import com.example.recipes.model.Recipe;
+import com.example.recipes.repositories.IngredientRepository;
 import com.example.recipes.repositories.RecipeRepository;
 import com.example.recipes.repositories.UnitOfMeasureRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,6 +35,9 @@ class IngredientServiceImplTest {
     @Mock
     UnitOfMeasureRepository unitOfMeasureRepository;
 
+    @Mock
+    IngredientRepository ingredientRepository;
+
     IngredientService ingredientService;
 
 
@@ -47,7 +51,11 @@ class IngredientServiceImplTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand, ingredientCommandToIngredient, unitOfMeasureRepository, recipeRepository);
+        ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand,
+                ingredientCommandToIngredient,
+                unitOfMeasureRepository,
+                recipeRepository,
+                ingredientRepository);
     }
 
     @Test
@@ -55,7 +63,7 @@ class IngredientServiceImplTest {
     }
 
     @Test
-    public void findByRecipeIdAndReceipeIdHappyPath() throws Exception {
+    void findByRecipeIdAndReceipeIdHappyPath() throws Exception {
         Recipe recipe = new Recipe();
         recipe.setId(1L);
 
@@ -85,7 +93,7 @@ class IngredientServiceImplTest {
     }
 
     @Test
-    public void testSaveRecipeCommand() throws Exception {
+    void testSaveRecipeCommand() throws Exception {
         IngredientCommand ingredientCommand = new IngredientCommand();
         ingredientCommand.setId(3L);
         ingredientCommand.setRecipeId(2L);
@@ -105,5 +113,13 @@ class IngredientServiceImplTest {
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, times(1)).save(any(Recipe.class));
 
+    }
+
+    @Test
+    void deleteIngredient() {
+        Long idToDelete = 2L;
+        ingredientService.deleteById(idToDelete);
+
+        verify(ingredientRepository, times(1)).deleteById(any());
     }
 }

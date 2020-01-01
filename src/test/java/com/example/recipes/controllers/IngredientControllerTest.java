@@ -100,16 +100,13 @@ class IngredientControllerTest {
     }
 
     @Test
-    public void testSaveOrUpdate() throws Exception {
-        //given
+    void testSaveOrUpdate() throws Exception {
         IngredientCommand ingredientCommand = new IngredientCommand();
         ingredientCommand.setId(3L);
         ingredientCommand.setRecipeId(2L);
 
-        //when
         when(ingredientService.saveIngredientCommand(any())).thenReturn(ingredientCommand);
 
-        //then
         mockMvc.perform(post("/recipe/2/ingredient")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("id", "")
@@ -119,4 +116,13 @@ class IngredientControllerTest {
                 .andExpect(view().name("redirect:/recipe/2/ingredient/3/show"));
 
     }
+
+    @Test
+    void testDelete() throws Exception {
+        mockMvc.perform(get("/recipe/1/ingredient/2/delete")).
+                andExpect(status().is3xxRedirection()).
+                andExpect(view().name("redirect:/recipe/1/ingredients"));
+        verify(ingredientService, times(1)).deleteById(anyLong());
+    }
+
 }
