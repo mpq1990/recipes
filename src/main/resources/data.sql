@@ -19,3 +19,4 @@ INSERT INTO unit_of_measure (uom) VALUES ('Sliced');
 INSERT INTO unit_of_measure (uom) VALUES ('Chopped');
 INSERT INTO unit_of_measure (uom) VALUES ('Wedge');
 INSERT INTO unit_of_measure (uom) VALUES ('Minced');
+INSERT INTO unit_of_measure (uom) VALUES ('Each');

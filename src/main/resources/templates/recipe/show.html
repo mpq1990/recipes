@@ -17,6 +17,7 @@
             crossorigin="anonymous" th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
 </head>
 <body>
+
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -32,9 +33,11 @@
                             </div>
                             <div class="col-md-9">
                                 <ul>
-                                    <li>cat one</li>
-                                    <li>cat two</li>
-                                    <li>cat three</li>
+                                    <li th:remove="all">cat one</li>
+                                    <li th:remove="all">cat two</li>
+                                    <li th:each="category: ${recipe.categories}" th:text="${category.getDescription()}">
+                                        cat three
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -43,13 +46,13 @@
                                 <h5>Prep Time:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>30 min</p>
+                                <p th:text="${(recipe.prepTime) + ' Min'}">30 min</p>
                             </div>
                             <div class="col-md-3">
                                 <h5>Difficulty:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>Easy</p>
+                                <p th:text="${recipe.difficulty}">Easy</p>
                             </div>
                         </div>
                         <div class="row">
@@ -57,13 +60,13 @@
                                 <h5>Cooktime:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>30 min</p>
+                                <p th:text="${(recipe.cookTime) + ' Min'}">30 min</p>
                             </div>
                             <div class="col-md-3">
                                 <h5>Servings:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>4</p>
+                                <p th:text="${recipe.servings}">4</p>
                             </div>
                         </div>
                         <div class="row">
@@ -71,13 +74,13 @@
                                 <h5>Source:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>30 min</p>
+                                <p th:text="${recipe.source}">Some Source</p>
                             </div>
                             <div class="col-md-3">
                                 <h5>URL:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p>http://www.example.com</p>
+                                <p th:text="${recipe.url}">http://www.example.com</p>
                             </div>
                         </div>
                     </div>
@@ -90,9 +93,12 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <ul>
-                                    <li>1 Cup of milk</li>
-                                    <li>1 Teaspoon of chocolate</li>
-                                    <li>1 Teaspoon of Sugar</li>
+                                    <li th:remove="all">1 Cup of milk</li>
+                                    <li th:remove="all">1 Teaspoon of chocolate</li>
+                                    <li th:each="ingredient: ${recipe.ingredients}"
+                                        th:text="${(ingredient.amount  + ' ' + ingredient.unitOfMeasure.uom +
+                                        ' - ' + ingredient.description)}">1 Teaspoon of Sugar
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -105,7 +111,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
+                                <p th:text="${recipe.directions}">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
                                     voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
                                     occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt
                                     mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et
@@ -127,7 +133,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                                <p th:text="${recipe.notes.recipeNotes}">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
                                     doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
                                     veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
                                     voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur

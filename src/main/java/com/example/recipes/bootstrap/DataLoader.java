@@ -272,7 +272,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         guacamole.
                 getIngredients().
-                add(createRecipeIngredient(guacamole, "2 ripe avocados", 2d, null));
+                add(createRecipeIngredient(guacamole, "2 ripe avocados", 2d, "Each"));
 
         guacamole.
                 getIngredients().
@@ -304,11 +304,11 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         guacamole.
                 getIngredients().
-                add(createRecipeIngredient(guacamole, "Red radishes or jicama, to garnish", 1d, null));
+                add(createRecipeIngredient(guacamole, "Red radishes or jicama, to garnish", 1d, "Each"));
 
         guacamole.
                 getIngredients().
-                add(createRecipeIngredient(guacamole, "Tortilla chips, to serve", 1d, null));
+                add(createRecipeIngredient(guacamole, "Tortilla chips, to serve", 1d, "Each"));
 
         recipeRepository.save(guacamole);
 

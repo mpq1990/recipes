@@ -1,5 +1,6 @@
 package com.example.recipes.controllers;
 
+import com.example.recipes.model.Recipe;
 import com.example.recipes.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,14 @@ public class RecipeController {
 
     @RequestMapping("/recipe/show/{id}")
     public String showById(@PathVariable String id, Model model) {
+        Recipe recipe = recipeService.findById(Long.parseLong(id));
+        recipe.getIngredients().forEach(ingredient -> {
+            if(ingredient.getUnitOfMeasure() != null) {
+                System.out.println(ingredient.getUnitOfMeasure().getUom());
+            } else {
+                System.out.println("it is null for ingredient " + ingredient.getDescription());
+            }
+        });
         model.addAttribute("recipe", recipeService.findById(Long.parseLong(id)));
         return "/recipe/show";
     }
