@@ -11,6 +11,7 @@ import com.example.recipes.repositories.UnitOfMeasureRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
@@ -114,7 +115,29 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        ingredientRepository.deleteById(id);
+    public void deleteById(Long recipeId, Long ingredientId) {
+//        ingredientRepository.deleteById(id);
+        log.debug("Deleting ingredient for recipe " + recipeId + " and id " + ingredientId);
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(recipeId);
+
+        if (optionalRecipe.isPresent()) {
+            Recipe recipe = optionalRecipe.get();
+            Optional<Ingredient> optionalIngredient =
+                    recipe.getIngredients().stream().
+                            filter(ingredient -> ingredient.getId().equals(ingredientId)).findFirst();
+
+            if (optionalIngredient.isPresent()) {
+                Ingredient ingredient = optionalIngredient.get();
+                ingredient.setRecipe(null);
+                recipe.getIngredients().remove(ingredient);
+                recipeRepository.save(recipe);
+            } else {
+                log.debug("Ingredient Id Not found. Id: " + ingredientId);
+            }
+
+        } else {
+            log.debug("Recipe Id Not found. Id: " + recipeId);
+        }
+
     }
 }
