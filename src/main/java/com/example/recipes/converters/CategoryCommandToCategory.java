@@ -18,7 +18,7 @@ public class CategoryCommandToCategory implements Converter<CategoryCommand, Cat
             return null;
         }
 
-        Category category = new Category();
+        final Category category = new Category();
         category.setId(categoryCommand.getId());
         category.setDescription(categoryCommand.getDescription());
         return category;
