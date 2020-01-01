@@ -17,7 +17,6 @@ import static org.junit.Assert.assertEquals;
 @DataJpaTest
 public class UnitOfMeasureRepositoryIT {
 
-
     @Autowired
     UnitOfMeasureRepository unitOfMeasureRepository;
 
