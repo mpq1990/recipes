@@ -1,8 +1,6 @@
 package com.example.recipes.commands;
 
-import com.example.recipes.model.Category;
 import com.example.recipes.model.Difficulty;
-import com.example.recipes.model.Ingredient;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,8 +20,9 @@ public class RecipeCommand {
     private String source;
     private String url;
     private String directions;
-    private Set<Ingredient> ingredients = new HashSet<>();
+    private Set<IngredientCommand> ingredientCommands = new HashSet<>();
     private Byte[] image;
     private Difficulty difficulty;
-    private Set<Category> categories = new HashSet<>();
+    private Set<CategoryCommand> categoryCommands = new HashSet<>();
+    private NotesCommand notesCommand;
 }
