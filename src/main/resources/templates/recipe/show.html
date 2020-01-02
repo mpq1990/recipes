@@ -25,14 +25,23 @@
             <div class="pannel-group">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h1 class="panel-title" th:text="${recipe.description}">Description of the recipe!</h1>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h1 class="panel-title" th:text="${recipe.description}">Description of the recipe!</h1>
+                            </div>
+
+                            <div class="col-md-1">
+                                <a class="btn btn-default" href="#"
+                                   th:href="@{'/recipe/' + ${recipe.id} + '/image'}" role="button">Update Image</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-3">
                                 <h5>Categories:</h5>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-3">
                                 <ul>
                                     <li th:remove="all">cat one</li>
                                     <li th:remove="all">cat two</li>
@@ -40,6 +49,11 @@
                                         cat three
                                     </li>
                                 </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="../../static/images/guacamole400x400WithX.jpg"
+                                     th:src="@{/images/guacamole400x400WithX.jpg}"
+                                     width="200" height="200">
                             </div>
                         </div>
                         <div class="row">
@@ -93,7 +107,8 @@
                                 <h1 class="panel-title">Ingredients</h1>
                             </div>
                             <div class="col-md-1">
-                                <a class="btn btn-default" href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" role="button">View</a>
+                                <a class="btn btn-default" href="#"
+                                   th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" role="button">View</a>
                             </div>
                         </div>
                     </div>
@@ -119,7 +134,8 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <p th:text="${recipe.directions}">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
+                                <p th:text="${recipe.directions}">At vero eos et accusamus et iusto odio dignissimos
+                                    ducimus qui blanditiis praesentium
                                     voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
                                     occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt
                                     mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et
@@ -141,7 +157,8 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <p th:text="${recipe.notes.recipeNotes}">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                                <p th:text="${recipe.notes.recipeNotes}">Sed ut perspiciatis unde omnis iste natus error
+                                    sit voluptatem accusantium
                                     doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
                                     veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
                                     voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
