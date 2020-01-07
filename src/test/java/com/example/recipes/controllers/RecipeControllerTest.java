@@ -33,7 +33,9 @@ class RecipeControllerTest {
 
     @BeforeEach
     void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(recipeController).
+                setControllerAdvice(new ControllerExceptionHandler()).
+                build();
     }
 
     @Test
@@ -61,8 +63,8 @@ class RecipeControllerTest {
 
     @Test
     void showByIdRecipeBadRequest() throws Exception {
-        mockMvc.perform(get("/recipe/ssss/show"))
-                .andExpect(status().isBadRequest()).
+        mockMvc.perform(get("/recipe/ssss/show")).
+                andExpect(status().isBadRequest()).
                 andExpect(view().name("400Error"));
     }
 

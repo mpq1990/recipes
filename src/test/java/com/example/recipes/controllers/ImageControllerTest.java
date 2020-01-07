@@ -34,7 +34,9 @@ class ImageControllerTest {
         MockitoAnnotations.initMocks(this);
 
         imageController = new ImageController(recipeService, imageService);
-        mockMvc = MockMvcBuilders.standaloneSetup(imageController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(imageController).
+                setControllerAdvice(new ControllerExceptionHandler()).
+                build();
     }
 
     @Test
@@ -49,6 +51,14 @@ class ImageControllerTest {
                 andExpect(status().isOk()).
                 andExpect(view().name("recipe/imageuploadform")).
                 andExpect(model().attributeExists("recipe"));
+    }
+
+    @Test
+    void showUploadFormBadRequest() throws Exception {
+
+        mockMvc.perform(get("/recipe/sdsd/image")).
+                andExpect(status().isBadRequest()).
+                andExpect(view().name("400Error"));
     }
 
     @Test
